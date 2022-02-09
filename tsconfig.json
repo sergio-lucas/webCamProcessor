@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "allowJs": true,
+    "moduleResolution": "node",
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  },
+  "include": [
+    "src",
+    ".eslintrc.js",
+    "babel.config.js",
+  ],
+  "exclude": [
+    "node_modules",
+    "docs",
+    "dist",
+    "webpack.config.js",
+  ]
+}

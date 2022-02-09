@@ -1,0 +1,1 @@
+// adapter for native modules

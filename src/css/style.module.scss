@@ -1,0 +1,45 @@
+.webCam {
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__container {
+    position: relative;
+    width: 263px;
+    height: 200px;
+    margin: 0 auto;
+  }
+  &__preview {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    -moz-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    border: 3px solid transparent;
+  }
+
+  &__reloadContainer,
+  &__infoContainer {
+    display: flex;
+    flex: 0 0 33%;
+    margin: 10px 0;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  &__reloadContainer {
+    order: -1;
+  }
+  &__infoContainer {
+    flex-direction: column;
+  }
+  &__setupLink {
+    color: #259fc1;
+  }
+
+  
+}
