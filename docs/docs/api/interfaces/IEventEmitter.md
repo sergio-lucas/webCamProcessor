@@ -29,7 +29,7 @@ custom_edit_url: null
 
 #### Defined in
 
-EventEmitter.ts:3
+[library/EventEmitter.ts:3](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/EventEmitter.ts#L3)
 
 ___
 
@@ -50,4 +50,4 @@ ___
 
 #### Defined in
 
-EventEmitter.ts:2
+[library/EventEmitter.ts:2](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/EventEmitter.ts#L2)

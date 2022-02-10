@@ -110,7 +110,7 @@ const config = {
       // Plugin / TypeDoc options
         {
           name: 'WeCam',
-          entryPoints: ['../src'],
+          entryPoints: ['../src/library'],
           tsconfig: '../tsconfig.json',
           watch: process.env.TYPEDOC_WATCH,
           excludePrivate: true,

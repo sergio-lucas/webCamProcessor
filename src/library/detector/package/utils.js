@@ -769,7 +769,7 @@ async function load(module, imports) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        // input = new URL('../assets/utils_bg.wasm', import.meta.url);
+        input = new URL('utils_bg.wasm', self.location.origin);
     }
     const imports = {};
     imports.wbg = {};

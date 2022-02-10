@@ -16,7 +16,7 @@ custom_edit_url: null
 
 ### constructor
 
-• **new WebCamProcessor**(`container`, `frameProcessor?`)
+• **new WebCamProcessor**(`container`)
 
 Creates an instance of WebCamProcessor.
 
@@ -27,7 +27,6 @@ Creates an instance of WebCamProcessor.
 | Name | Type |
 | :------ | :------ |
 | `container` | `HTMLElement` |
-| `frameProcessor?` | `Function` |
 
 #### Inherited from
 
@@ -35,7 +34,7 @@ Creates an instance of WebCamProcessor.
 
 #### Defined in
 
-WebCamProcessor.ts:58
+[library/WebCamProcessor.ts:48](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L48)
 
 ## Properties
 
@@ -45,7 +44,7 @@ WebCamProcessor.ts:58
 
 #### Defined in
 
-WebCamProcessor.ts:45
+[library/WebCamProcessor.ts:35](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L35)
 
 ___
 
@@ -55,17 +54,25 @@ ___
 
 #### Defined in
 
-WebCamProcessor.ts:44
+[library/WebCamProcessor.ts:34](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L34)
 
 ___
 
-### frameProcessor
+### detectorHandler
 
-• **frameProcessor**: [`FrameProcessor`](FrameProcessor.md)
+• **detectorHandler**: () => `void`
+
+#### Type declaration
+
+▸ (): `void`
+
+##### Returns
+
+`void`
 
 #### Defined in
 
-WebCamProcessor.ts:47
+[library/WebCamProcessor.ts:42](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L42)
 
 ___
 
@@ -75,7 +82,7 @@ ___
 
 #### Defined in
 
-WebCamProcessor.ts:49
+[library/WebCamProcessor.ts:38](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L38)
 
 ___
 
@@ -85,7 +92,7 @@ ___
 
 #### Defined in
 
-WebCamProcessor.ts:50
+[library/WebCamProcessor.ts:39](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L39)
 
 ___
 
@@ -95,7 +102,7 @@ ___
 
 #### Defined in
 
-WebCamProcessor.ts:48
+[library/WebCamProcessor.ts:37](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L37)
 
 ___
 
@@ -105,7 +112,7 @@ ___
 
 #### Defined in
 
-WebCamProcessor.ts:51
+[library/WebCamProcessor.ts:40](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L40)
 
 ___
 
@@ -115,7 +122,7 @@ ___
 
 #### Defined in
 
-WebCamProcessor.ts:46
+[library/WebCamProcessor.ts:36](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L36)
 
 ## Accessors
 
@@ -129,21 +136,7 @@ WebCamProcessor.ts:46
 
 #### Defined in
 
-WebCamProcessor.ts:77
-
-___
-
-### mesh\_preview
-
-• `get` **mesh_preview**(): `Element`
-
-#### Returns
-
-`Element`
-
-#### Defined in
-
-WebCamProcessor.ts:80
+[library/WebCamProcessor.ts:74](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L74)
 
 ## Methods
 
@@ -161,7 +154,7 @@ Stop camera streaming and remove view template
 
 #### Defined in
 
-WebCamProcessor.ts:191
+[library/WebCamProcessor.ts:176](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L176)
 
 ___
 
@@ -190,7 +183,7 @@ Remove event listener. Remove callback from array
 
 #### Defined in
 
-EventEmitter.ts:27
+[library/EventEmitter.ts:27](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/EventEmitter.ts#L27)
 
 ___
 
@@ -223,23 +216,13 @@ Add event listener. Push it to the events array and invoke by calling emit
 
 #### Defined in
 
-WebCamProcessor.ts:26
+[library/WebCamProcessor.ts:13](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L13)
 
 ___
 
-### onProcess
+### onFaceDetect
 
-▸ **onProcess**(`__namedParameters`, `cb`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.errors` | `number`[] |
-| `__namedParameters.isFaceExist` | `boolean` |
-| `__namedParameters.ms` | `number` |
-| `cb` | `Function` |
+▸ **onFaceDetect**(): `void`
 
 #### Returns
 
@@ -247,7 +230,7 @@ ___
 
 #### Defined in
 
-WebCamProcessor.ts:132
+[library/WebCamProcessor.ts:66](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L66)
 
 ___
 
@@ -265,7 +248,7 @@ Pause camera streaming
 
 #### Defined in
 
-WebCamProcessor.ts:160
+[library/WebCamProcessor.ts:148](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L148)
 
 ___
 
@@ -283,4 +266,4 @@ Resume camera streaming
 
 #### Defined in
 
-WebCamProcessor.ts:180
+[library/WebCamProcessor.ts:165](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/WebCamProcessor.ts#L165)

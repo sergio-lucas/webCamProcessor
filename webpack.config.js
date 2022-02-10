@@ -8,29 +8,20 @@ module.exports = {
   target: ['web', 'es5'],
   entry: {
     vanilla: {
-      import: './src/WebCamProcessor.ts',
+      import: './src/library/FaceCheck.ts',
       library: {
-        name: 'WebCam',
         type: 'umd',
         umdNamedDefine: true,
       }
     },
-    // face_mesh: {
-    //   import: './src/detector/face_mesh.js',
-    //   library: {
-    //     name: '[name]',
-    //     type: 'var',
-    //     export: 'default'
-    //   }
-    // },
-    // wasm_library: {
-    //   import: './src/detector/wasm_helper.js',
-    //   library: {
-    //     name: '[name]',
-    //     type: 'var',
-    //     export: 'default'
-    //   }
-    // }
+    wasm_library: {
+      import: './src/library/detector/wasm_helper.js',
+      library: {
+        name: '[name]',
+        type: 'var',
+        export: 'default'
+      }
+    }
     // shared: 'lodash',
   },
   module: {
@@ -49,40 +40,36 @@ module.exports = {
           { loader: "sass-loader" }
         ],
       },
-      // {
-      //   test: /.wasm$/,
-      //   type: 'asset/resource',
-      //   generator: {
-      //     filename: '../assets/[name][ext]'
-      //   }
-      // }
     ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.css'],
     alias: {
-      'utils': path.resolve(__dirname, './src/detector/utils')
+      'utils': path.resolve(__dirname, './src/library/detector/utils')
     }
   },
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'public'),
     clean: true,
   },
   devServer: {
-    static: './dist',
+    static: './public',
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Development',
-      template: './src/vanilla/index.html'
+      template: './src/index.html',
+      chunks: ['vanilla']
     }),
     new CopyPlugin({
       patterns: [
-        { from: path.resolve(__dirname, "./src/detector/assets"),
-          to: path.resolve(__dirname, 'dist/detector/assets'),
-        },
+        { from: path.resolve(__dirname, "./static") },
+        { from: path.resolve(__dirname, "./src/library/detector/package/utils_bg.wasm") },
+        // { from: path.resolve(__dirname, "./src/detector/assets"),
+        //   to: path.resolve(__dirname, 'dist/detector/assets'),
+        // },
       ],
     })
     // new webpack.ProvidePlugin({

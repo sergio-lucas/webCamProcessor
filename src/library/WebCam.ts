@@ -1,30 +1,15 @@
-import { IWebCamProcessorEvents } from './IWebCamProcessorEvents';
-import { FrameProcessor } from './FrameProcessor';
-import { ProcessorController } from './ProcessorController';
+import { IWebCamEvents, EventType } from './IWebCamEvents';
 import { EventEmitter } from './EventEmitter';
+
+import { throttle, dom } from '../helpers';
 
 import styles from './css/style.module.scss';
 
 
-const createElement = (el: string) : any => document.createElement(el);
 
 
-/**
- * 
- * new (dib, { faceCheck: {processor: func, renderMesh}})
- */
-
-// const defaultProps = {
-//   faceCheck: {
-//     processor: () => {},
-//     renderMesh: false
-//   }
-// }
-{/* <canvas id="mesh_preview"></canvas> */}
-
-
-export declare interface WebCamProcessor {
-  on<U extends keyof IWebCamProcessorEvents>(event: U, callback: IWebCamProcessorEvents[U]): void;
+export declare interface WebCam {
+  on<U extends keyof IWebCamEvents>(event: U, callback: IWebCamEvents[U]): void;
 }
 
 enum State {
@@ -33,31 +18,23 @@ enum State {
   Pause
 }
 
-enum EventType {
-  FaceDetected = "face_detected",
-  Ready = "ready",
-  Pause = "pause",
-  Resume = "resume",
-  Destroy = "destroy"
-};
-const myWorker = new Worker("worker.js");
 
-export class WebCamProcessor extends EventEmitter {
+export class WebCam extends EventEmitter {
   container: HTMLElement;
   camView: HTMLElement;
   video: HTMLVideoElement;
-  frameProcessor: ProcessorController;
   state: State;
   outputCanvas: HTMLCanvasElement;
-  outputCtx: any;
+  outputCtx: CanvasRenderingContext2D | null;
   stream: MediaStream;
+
+  // frameHandler = throttle(this.onFrame.bind(this), 1000 / 30); // TODO: Throttle function execution
   /**
-   * Creates an instance of WebCamProcessor.
+   * Creates an instance of WebCam.
    * @param {HTMLElement} container
-   * @param {Function} [frameProcessor]
-   * @memberof WebCamProcessor
+   * @memberof WebCam
    */
-  constructor(container: HTMLElement, frameHandler?: Function) {
+  constructor(container: HTMLElement) {
     super();
     if (!container) {
       throw new Error("Please provide a DOM element");
@@ -65,8 +42,6 @@ export class WebCamProcessor extends EventEmitter {
 
     this.container = container;
     this.camView = this.__createView();
-    this.frameProcessor = new ProcessorController(new FrameProcessor(this, frameHandler))
-    // this.processor = new ProcessorController(new FrameProcessor(this, frameHandler))
     this.state = State.Stop;
 
     // resize
@@ -77,12 +52,14 @@ export class WebCamProcessor extends EventEmitter {
     return this;
   }
 
+  onFrame(canvasCtx: CanvasRenderingContext2D | null) {}
+
   get camera_preview(): HTMLCanvasElement {
     return this.camView.querySelector('#camera_preview');
   }
 
   private __createView() {
-    const view = createElement("div");
+    const view = dom.crEl("div");
     view.className = styles.webCam;
     view.innerHTML = `
       <div class="${styles.webCam__wrapper}">
@@ -102,7 +79,7 @@ export class WebCamProcessor extends EventEmitter {
   }
 
   private __startup() {
-    this.video = createElement("video");
+    this.video = dom.crEl("video");
     this.video.addEventListener( "canplay", this.onCameraReady.bind(this), false );
     this.outputCanvas = this.camera_preview;
     this.outputCtx = this.camera_preview.getContext( "2d" );
@@ -110,18 +87,14 @@ export class WebCamProcessor extends EventEmitter {
     this.__requestAccess();
   }
 
-  private async __nextFrame(ms: number) {
-    try
-		{
-			this.outputCtx.drawImage( this.video, 0, 0, 640, 480 );
-      const rgba = this.outputCtx.getImageData(0, 0, 640, 480);
+  private __nextFrame(ms: number) {
+    this.outputCtx.drawImage( this.video, 0, 0, 640, 480 );
 
-      myWorker.postMessage(["detect", rgba])
-
-      if( this.state !== State.Stop ) {
-        window.requestAnimationFrame( this.__nextFrame.bind(this) );
-      }
-		} catch {}
+    if( this.state === State.Running ) {
+      // this.frameHandler.call(this, this.outputCtx);
+      this.onFrame(this.outputCtx);
+      window.requestAnimationFrame( this.__nextFrame.bind(this) );
+    }
   }
 
   private onCameraReady() {
@@ -131,9 +104,10 @@ export class WebCamProcessor extends EventEmitter {
     this.emit(EventType.Ready);
   }
 
-  onProcess({ errors, isFaceExist, ms}: { errors: Array<number>, isFaceExist: boolean, ms: number}, cb: Function) {
-    this.emit(EventType.FaceDetected)
-    cb(errors, isFaceExist, ms);
+  private __requestAccess() {
+    navigator.mediaDevices.getUserMedia({"video" : true })
+      .then(this.onStream.bind(this))
+      .catch(this.onFail)
   }
 
   private onStream(stream: MediaStream) {
@@ -144,26 +118,19 @@ export class WebCamProcessor extends EventEmitter {
 
     window.requestAnimationFrame(this.__nextFrame.bind(this))
   }
+
   private onFail(error: any) {
     console.error(error);
     throw new Error("No camera access");
-  }
-  private __requestAccess() {
-    navigator.mediaDevices.getUserMedia({"video" : true })
-      .then(this.onStream.bind(this))
-      .catch(this.onFail)
   }
 
   /**
    * Pause camera streaming
    *
-   * @memberof WebCamProcessor
+   * @memberof WebCam
    */
   pause() {
     if (this.state === State.Running) {
-      // if (this.stream && this.stream.stop) {
-      //   this.stream.stop();
-      // }
       if (this.stream) {
         this.stream.getTracks().forEach(track => {
           track.stop();
@@ -177,7 +144,7 @@ export class WebCamProcessor extends EventEmitter {
   /**
    * Resume camera streaming
    *
-   * @memberof WebCamProcessor
+   * @memberof WebCam
    */
   resume() {
     if (this.state !== State.Running) {
@@ -188,13 +155,12 @@ export class WebCamProcessor extends EventEmitter {
   /**
    * Stop camera streaming and remove view template
    *
-   * @memberof WebCamProcessor
+   * @memberof WebCam
    */
   destroy() {
+    this.pause();
     this.container.removeChild(this.camView);
 
     this.emit(EventType.Destroy);
-
-    // alert("Please dont forget to unsubscribe from events")
   }
 }

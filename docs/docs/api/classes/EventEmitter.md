@@ -49,7 +49,7 @@ Remove event listener. Remove callback from array
 
 #### Defined in
 
-EventEmitter.ts:27
+[library/EventEmitter.ts:27](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/EventEmitter.ts#L27)
 
 ___
 
@@ -78,4 +78,4 @@ Add event listener. Push it to the events array and invoke by calling emit
 
 #### Defined in
 
-EventEmitter.ts:16
+[library/EventEmitter.ts:16](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/EventEmitter.ts#L16)

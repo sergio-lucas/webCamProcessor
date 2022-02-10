@@ -7,12 +7,14 @@ sidebar_position: 0.5
 custom_edit_url: null
 ---
 
+## Enumerations
+
+- [EventType](enums/EventType.md)
+
 ## Classes
 
 - [EventEmitter](classes/EventEmitter.md)
-- [FrameProcessor](classes/FrameProcessor.md)
-- [Processor](classes/Processor.md)
-- [ProcessorController](classes/ProcessorController.md)
+- [FaceDetectionWorker](classes/FaceDetectionWorker.md)
 - [WebCamProcessor](classes/WebCamProcessor.md)
 
 ## Interfaces

@@ -23,5 +23,7 @@
     "docs",
     "dist",
     "webpack.config.js",
+    "src/controllers",
+    "src/helpers",
   ]
 }

@@ -2,7 +2,7 @@ importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.j
 importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/tf-tflite.min.js");
 importScripts("https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js");
 
-importScripts("detector/wasm_library.js");
+importScripts("wasm_library.js");
 
 let frame_processor;
 let faceChecker;
