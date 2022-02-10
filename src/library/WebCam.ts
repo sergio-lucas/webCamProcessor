@@ -28,7 +28,6 @@ export class WebCam extends EventEmitter {
   outputCtx: CanvasRenderingContext2D | null;
   stream: MediaStream;
 
-  // frameHandler = throttle(this.onFrame.bind(this), 1000 / 30); // TODO: Throttle function execution
   /**
    * Creates an instance of WebCam.
    * @param {HTMLElement} container
@@ -91,7 +90,6 @@ export class WebCam extends EventEmitter {
     this.outputCtx.drawImage( this.video, 0, 0, 640, 480 );
 
     if( this.state === State.Running ) {
-      // this.frameHandler.call(this, this.outputCtx);
       this.onFrame(this.outputCtx);
       window.requestAnimationFrame( this.__nextFrame.bind(this) );
     }

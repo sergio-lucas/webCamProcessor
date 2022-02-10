@@ -98,7 +98,8 @@ const processFrame = (rgba, rgbaBuffer) => {
       face_processor,
       fc_results
   );
-  const faceData = cropImage(rgba)
+  let faceData = cropImage(rgba);
+      faceData.errors = errors;
 
   postMessage({
     type: 'detect',

@@ -36,7 +36,7 @@ export class FaceCheckBridge extends EventEmitter {
   }
   onmessageReceive(ev: MessageEvent<any>) {
     if (!ev.data.type) return;
-    this.emit(ev.data.type)
+    this.emit(ev.data.type, ev.data.data)
   }
 
   preloadFaceCheck(data: any) {
@@ -45,6 +45,10 @@ export class FaceCheckBridge extends EventEmitter {
 
   process_frame(data: { originImage: ImageData }, transfer: Transferable[]) {
     this.worker.postMessage({type: "process_frame", payload: data }, transfer);
+  }
+
+  destroy() {
+    this.worker.terminate();
   }
 }
 
