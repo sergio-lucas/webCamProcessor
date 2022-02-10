@@ -106,6 +106,10 @@ const processFrame = (rgba, rgbaBuffer) => {
     data: faceData
   }, [faceData.face_image.buffer]);
 }
+
+const resetAnchor = () => {
+  fc_results = null;
+}
 const detect = async ({originImage}) => {
   if (!face_processor) return;
   await face_processor.process_frame(originImage);
@@ -127,6 +131,8 @@ onmessage = function(e) {
     case 'show_mesh':
     case 'hide_mesh':
     case 'reset_anchor':
+      resetAnchor();
+      break;
     case 'process_frame':
       detect(payload);
       break;

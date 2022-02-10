@@ -59,6 +59,9 @@ export const App = {
 
     return frame;
   },
+  resetAnchor: () => {
+    bridge.resetAnchor();
+  },
   mount: (domEl: HTMLElement) => {
     cameraCanvas = new WebCam(domEl);
     return cameraCanvas;

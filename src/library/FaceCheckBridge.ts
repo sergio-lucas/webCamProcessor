@@ -47,6 +47,10 @@ export class FaceCheckBridge extends EventEmitter {
     this.worker.postMessage({type: "process_frame", payload: data }, transfer);
   }
 
+  resetAnchor() {
+    this.worker.postMessage({type: "reset_anchor"})
+  }
+
   destroy() {
     this.worker.terminate();
   }
