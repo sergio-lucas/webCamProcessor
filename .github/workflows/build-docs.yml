@@ -1,10 +1,9 @@
 name: Build Documentation
 
-
 on:
   push:
     branches: [main]
-     paths:
+    paths:
       - '.github/workflows/build-docs.yml'
       - 'docs/**'
       - 'src/**'
