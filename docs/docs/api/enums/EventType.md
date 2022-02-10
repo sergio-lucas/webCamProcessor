@@ -16,7 +16,7 @@ A Camera Device's video format. Do not create instances of this type yourself.
 
 #### Defined in
 
-[IWebCamEvents.ts:9](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/IWebCamEvents.ts#L9)
+[IWebCamEvents.ts:9](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/IWebCamEvents.ts#L9)
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 #### Defined in
 
-[IWebCamEvents.ts:6](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/IWebCamEvents.ts#L6)
+[IWebCamEvents.ts:6](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/IWebCamEvents.ts#L6)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 #### Defined in
 
-[IWebCamEvents.ts:8](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/IWebCamEvents.ts#L8)
+[IWebCamEvents.ts:8](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/IWebCamEvents.ts#L8)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 #### Defined in
 
-[IWebCamEvents.ts:7](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/IWebCamEvents.ts#L7)
+[IWebCamEvents.ts:7](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/IWebCamEvents.ts#L7)

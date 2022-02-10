@@ -30,7 +30,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[FaceCheckBridge.ts:31](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/FaceCheckBridge.ts#L31)
+[FaceCheckBridge.ts:31](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/FaceCheckBridge.ts#L31)
 
 ## Properties
 
@@ -40,7 +40,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[FaceCheckBridge.ts:30](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/FaceCheckBridge.ts#L30)
+[FaceCheckBridge.ts:30](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/FaceCheckBridge.ts#L30)
 
 ## Methods
 
@@ -54,7 +54,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[FaceCheckBridge.ts:54](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/FaceCheckBridge.ts#L54)
+[FaceCheckBridge.ts:54](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/FaceCheckBridge.ts#L54)
 
 ___
 
@@ -83,7 +83,7 @@ Remove event listener. Remove callback from array
 
 #### Defined in
 
-[EventEmitter.ts:27](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/EventEmitter.ts#L27)
+[EventEmitter.ts:27](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/EventEmitter.ts#L27)
 
 ___
 
@@ -116,7 +116,7 @@ Add event listener. Push it to the events array and invoke by calling emit
 
 #### Defined in
 
-[FaceCheckBridge.ts:26](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/FaceCheckBridge.ts#L26)
+[FaceCheckBridge.ts:26](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/FaceCheckBridge.ts#L26)
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 #### Defined in
 
-[FaceCheckBridge.ts:37](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/FaceCheckBridge.ts#L37)
+[FaceCheckBridge.ts:37](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/FaceCheckBridge.ts#L37)
 
 ___
 
@@ -156,7 +156,7 @@ ___
 
 #### Defined in
 
-[FaceCheckBridge.ts:42](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/FaceCheckBridge.ts#L42)
+[FaceCheckBridge.ts:42](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/FaceCheckBridge.ts#L42)
 
 ___
 
@@ -178,7 +178,7 @@ ___
 
 #### Defined in
 
-[FaceCheckBridge.ts:46](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/FaceCheckBridge.ts#L46)
+[FaceCheckBridge.ts:46](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/FaceCheckBridge.ts#L46)
 
 ___
 
@@ -192,4 +192,4 @@ ___
 
 #### Defined in
 
-[FaceCheckBridge.ts:50](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/FaceCheckBridge.ts#L50)
+[FaceCheckBridge.ts:50](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/FaceCheckBridge.ts#L50)

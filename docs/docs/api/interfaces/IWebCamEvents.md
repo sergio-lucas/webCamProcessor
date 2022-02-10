@@ -18,7 +18,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[IWebCamEvents.ts:15](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/IWebCamEvents.ts#L15)
+[IWebCamEvents.ts:15](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/IWebCamEvents.ts#L15)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[IWebCamEvents.ts:14](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/IWebCamEvents.ts#L14)
+[IWebCamEvents.ts:14](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/IWebCamEvents.ts#L14)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 #### Defined in
 
-[IWebCamEvents.ts:12](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/IWebCamEvents.ts#L12)
+[IWebCamEvents.ts:12](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/IWebCamEvents.ts#L12)
 
 ___
 
@@ -60,4 +60,4 @@ ___
 
 #### Defined in
 
-[IWebCamEvents.ts:13](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/IWebCamEvents.ts#L13)
+[IWebCamEvents.ts:13](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/IWebCamEvents.ts#L13)

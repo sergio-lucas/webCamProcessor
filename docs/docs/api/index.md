@@ -42,4 +42,4 @@ custom_edit_url: null
 
 #### Defined in
 
-[FaceCheck.ts:46](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/FaceCheck.ts#L46)
+[FaceCheck.ts:46](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/FaceCheck.ts#L46)

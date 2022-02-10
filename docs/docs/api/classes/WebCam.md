@@ -34,7 +34,7 @@ Creates an instance of WebCam.
 
 #### Defined in
 
-[WebCam.ts:36](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L36)
+[WebCam.ts:36](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L36)
 
 ## Properties
 
@@ -44,7 +44,7 @@ Creates an instance of WebCam.
 
 #### Defined in
 
-[WebCam.ts:24](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L24)
+[WebCam.ts:24](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L24)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[WebCam.ts:23](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L23)
+[WebCam.ts:23](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L23)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[WebCam.ts:27](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L27)
+[WebCam.ts:27](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L27)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[WebCam.ts:28](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L28)
+[WebCam.ts:28](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L28)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[WebCam.ts:26](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L26)
+[WebCam.ts:26](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L26)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[WebCam.ts:29](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L29)
+[WebCam.ts:29](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L29)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[WebCam.ts:25](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L25)
+[WebCam.ts:25](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L25)
 
 ## Accessors
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[WebCam.ts:56](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L56)
+[WebCam.ts:56](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L56)
 
 ## Methods
 
@@ -136,7 +136,7 @@ Stop camera streaming and remove view template
 
 #### Defined in
 
-[WebCam.ts:158](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L158)
+[WebCam.ts:158](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L158)
 
 ___
 
@@ -165,7 +165,7 @@ Remove event listener. Remove callback from array
 
 #### Defined in
 
-[EventEmitter.ts:27](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/EventEmitter.ts#L27)
+[EventEmitter.ts:27](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/EventEmitter.ts#L27)
 
 ___
 
@@ -198,7 +198,7 @@ Add event listener. Push it to the events array and invoke by calling emit
 
 #### Defined in
 
-[WebCam.ts:12](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L12)
+[WebCam.ts:12](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L12)
 
 ___
 
@@ -218,7 +218,7 @@ ___
 
 #### Defined in
 
-[WebCam.ts:54](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L54)
+[WebCam.ts:54](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L54)
 
 ___
 
@@ -236,7 +236,7 @@ Pause camera streaming
 
 #### Defined in
 
-[WebCam.ts:130](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L130)
+[WebCam.ts:130](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L130)
 
 ___
 
@@ -254,4 +254,4 @@ Resume camera streaming
 
 #### Defined in
 
-[WebCam.ts:147](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/WebCam.ts#L147)
+[WebCam.ts:147](https://github.com/sergio-lucas/webCamProcessor/blob/bb7bfcb/src/library/WebCam.ts#L147)
