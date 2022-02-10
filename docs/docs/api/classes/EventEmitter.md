@@ -10,7 +10,9 @@ custom_edit_url: null
 
 - **`EventEmitter`**
 
-  ↳ [`WebCamProcessor`](WebCamProcessor.md)
+  ↳ [`WebCam`](WebCam.md)
+
+  ↳ [`FaceCheckBridge`](FaceCheckBridge.md)
 
 ## Implements
 
@@ -49,7 +51,7 @@ Remove event listener. Remove callback from array
 
 #### Defined in
 
-[library/EventEmitter.ts:27](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/EventEmitter.ts#L27)
+[EventEmitter.ts:27](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/EventEmitter.ts#L27)
 
 ___
 
@@ -78,4 +80,4 @@ Add event listener. Push it to the events array and invoke by calling emit
 
 #### Defined in
 
-[library/EventEmitter.ts:16](https://github.com/sergio-lucas/webCamProcessor/blob/e78be59/src/library/EventEmitter.ts#L16)
+[EventEmitter.ts:16](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/EventEmitter.ts#L16)

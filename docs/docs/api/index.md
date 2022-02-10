@@ -14,10 +14,32 @@ custom_edit_url: null
 ## Classes
 
 - [EventEmitter](classes/EventEmitter.md)
-- [FaceDetectionWorker](classes/FaceDetectionWorker.md)
-- [WebCamProcessor](classes/WebCamProcessor.md)
+- [FaceCheckBridge](classes/FaceCheckBridge.md)
+- [WebCam](classes/WebCam.md)
 
 ## Interfaces
 
 - [IEventEmitter](interfaces/IEventEmitter.md)
-- [IWebCamProcessorEvents](interfaces/IWebCamProcessorEvents.md)
+- [IWebCamEvents](interfaces/IWebCamEvents.md)
+
+## Variables
+
+### App
+
+• **App**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `captureFrame` | () => `string` |
+| `destroyDetector` | () => `void` |
+| `loadDetector` | () => `void` |
+| `mount` | (`domEl`: `HTMLElement`) => [`WebCam`](classes/WebCam.md) |
+| `pauseDetector` | () => `void` |
+| `resetAnchor` | () => `void` |
+| `startDetector` | () => `void` |
+
+#### Defined in
+
+[FaceCheck.ts:46](https://github.com/sergio-lucas/webCamProcessor/blob/13b69e2/src/library/FaceCheck.ts#L46)
