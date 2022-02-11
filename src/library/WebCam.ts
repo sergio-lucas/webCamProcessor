@@ -1,7 +1,7 @@
 import { IWebCamEvents, EventType } from './IWebCamEvents';
 import { EventEmitter } from './EventEmitter';
 
-import { throttle, dom } from '../helpers';
+import { dom } from '../helpers';
 
 import styles from './css/style.module.scss';
 
@@ -105,7 +105,7 @@ export class WebCam extends EventEmitter {
   private __requestAccess() {
     navigator.mediaDevices.getUserMedia({"video" : true })
       .then(this.onStream.bind(this))
-      .catch(this.onFail)
+      .catch(this.onFail.bind(this));
   }
 
   private onStream(stream: MediaStream) {
@@ -119,6 +119,7 @@ export class WebCam extends EventEmitter {
 
   private onFail(error: any) {
     console.error(error);
+    this.emit(EventType.Failed, error);
     throw new Error("No camera access");
   }
 

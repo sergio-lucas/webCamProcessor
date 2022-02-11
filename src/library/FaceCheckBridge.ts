@@ -28,9 +28,13 @@ export declare interface FaceCheckBridge {
 
 export class FaceCheckBridge extends EventEmitter {
   worker: Worker;
+  url: string | URL;
   constructor(url: string | URL) {
     super();
-    this.worker = new Worker(url);
+    this.url = url;
+  }
+  private init() {
+    this.worker = new Worker(this.url);
 
     this.worker.onmessage = this.onmessageReceive.bind(this);
   }
@@ -40,6 +44,7 @@ export class FaceCheckBridge extends EventEmitter {
   }
 
   preloadFaceCheck(data: any) {
+    this.init();
     this.worker.postMessage({type: "load", payload: data})
   }
 
