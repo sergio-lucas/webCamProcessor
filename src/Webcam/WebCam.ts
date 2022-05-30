@@ -1,4 +1,4 @@
-import { IWebCamEvents, EventType } from '../IWebCamEvents';
+import { IWebCamEvents, EventType } from './IWebCamEvents';
 import { EventEmitter } from '../EventEmitter/EventEmitter';
 
 export declare interface WebCam {

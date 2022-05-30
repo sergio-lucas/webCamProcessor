@@ -11,14 +11,14 @@ module.exports = {
   target: ['web', 'es5'],
   entry: {
     [EXT]: {
-      import: './src/library/FaceCheck.ts',
+      import: './src/FaceCheck.ts',
       library: {
         type: 'umd',
         umdNamedDefine: true,
       }
     },
     wasm_library: {
-      import: './src/library/detector/wasm_helper.js',
+      import: './src/detector/wasm_helper.js',
       library: {
         name: '[name]',
         type: 'var',
@@ -48,7 +48,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.css'],
     alias: {
-      'utils': path.resolve(__dirname, './src/library/detector/utils'),
+      'utils': path.resolve(__dirname, './src/detector/utils'),
       "react": "preact/compat",
       "react-dom/test-utils": "preact/test-utils",
       "react-dom": "preact/compat",     // Must be below test-utils
@@ -73,7 +73,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: path.resolve(__dirname, "./static") },
-        { from: path.resolve(__dirname, "./src/library/detector/package/utils_bg.wasm") },
+        { from: path.resolve(__dirname, "./src/detector/package/utils_bg.wasm") },
         // { from: path.resolve(__dirname, "./src/detector/assets"),
         //   to: path.resolve(__dirname, 'dist/detector/assets'),
         // },

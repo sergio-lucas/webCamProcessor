@@ -1,7 +1,7 @@
-import { WebCam } from './Webcam/WebCam';
+import { WebCam } from '../Webcam/WebCam';
 import { FaceCheckBridge } from './FaceCheckBridge';
-import { Views } from './Views/Permissions/index';
-import { throttle } from '../helpers';
+import { Views } from '../Views/Permissions/index';
+import { throttle } from '../../helpers';
 
 let cameraCanvas: WebCam = null;
 const bridge = new FaceCheckBridge("worker.js");
