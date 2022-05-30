@@ -1,7 +1,6 @@
 import { WebCam } from './Webcam/WebCam';
 import { FaceCheckBridge } from './FaceCheckBridge';
-import { Template } from './Template/Template';
-import { Views } from './Permissions/index';
+import { Views } from './Views/Permissions/index';
 import { throttle } from '../helpers';
 
 let cameraCanvas: WebCam = null;
@@ -47,7 +46,6 @@ const pauseDetector = () => {
 
 export const App = {
   camera: new WebCam(),
-  template: Template,
   views: Views,
   pauseDetector: pauseDetector,
   startDetector: startFaceDetector,

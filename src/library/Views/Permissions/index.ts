@@ -1,6 +1,5 @@
 // import html from "./Permissions.html";
 var template = require('./Permissions.html');
-import { Template } from '../Template/Template';
 
 var view = {
   text: "Joe",

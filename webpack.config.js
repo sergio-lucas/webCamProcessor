@@ -2,12 +2,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 
+const EXT = "face_lib";
+const BUILD_FOLDER = "wwwroot";
+
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   target: ['web', 'es5'],
   entry: {
-    vanilla: {
+    [EXT]: {
       import: './src/library/FaceCheck.ts',
       library: {
         type: 'umd',
@@ -45,23 +48,27 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.css'],
     alias: {
-      'utils': path.resolve(__dirname, './src/library/detector/utils')
+      'utils': path.resolve(__dirname, './src/library/detector/utils'),
+      "react": "preact/compat",
+      "react-dom/test-utils": "preact/test-utils",
+      "react-dom": "preact/compat",     // Must be below test-utils
+      "react/jsx-runtime": "preact/jsx-runtime",
     }
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, BUILD_FOLDER),
     clean: true,
   },
   devServer: {
-    static: './public',
+    static: path.resolve(__dirname, BUILD_FOLDER),
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Development',
       template: './src/index.html',
-      chunks: ['vanilla']
+      chunks: [EXT]
     }),
     new CopyPlugin({
       patterns: [
@@ -71,7 +78,7 @@ module.exports = {
         //   to: path.resolve(__dirname, 'dist/detector/assets'),
         // },
       ],
-    })
+    }),
     // new webpack.ProvidePlugin({
     //   'utils': 'utils',
     //   wasm: path.resolve(path.join(__dirname, ''))

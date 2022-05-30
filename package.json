@@ -16,8 +16,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.17.12",
     "@babel/preset-typescript": "^7.17.12",
     "@types/jest": "^27.5.1",
+    "@types/react": "^18.0.9",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.6.0",
     "html-loader": "^3.1.0",
@@ -36,6 +38,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "@tensorflow/tfjs-tflite": "^0.0.1-alpha.8"
+    "@tensorflow/tfjs-tflite": "^0.0.1-alpha.8",
+    "preact": "^10.7.2"
   }
 }
