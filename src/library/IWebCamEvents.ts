@@ -10,9 +10,7 @@ export enum EventType {
   Failed = "failed"
 };
 export interface IWebCamEvents {
-  [EventType.Pause]: () => void;
-  [EventType.Ready]: () => void;
-  [EventType.FaceDetected]: () => void;
-  [EventType.Destroy]: () => void;
-  [EventType.Failed]: (e: Error) => void;
+  pause: () => void;
+  ready: () => void;
+  failed: (e: Error) => void;
 }

@@ -1,5 +1,7 @@
-import { WebCam } from './WebCam';
+import { WebCam } from './Webcam/WebCam';
 import { FaceCheckBridge } from './FaceCheckBridge';
+import { Template } from './Template/Template';
+import { Views } from './Permissions/index';
 import { throttle } from '../helpers';
 
 let cameraCanvas: WebCam = null;
@@ -14,7 +16,7 @@ const processorFn = (context: CanvasRenderingContext2D | null) => {
 };
 
 const startFaceDetector = () => {
-  cameraCanvas.onFrame = throttle(processorFn, 1000 / 30);;
+  // cameraCanvas.onFrame = throttle(processorFn, 1000 / 30);;
 };
 
 const faceCheckerConfig = {
@@ -40,10 +42,13 @@ bridge.on("detect", (data) => {
 });
 
 const pauseDetector = () => {
-  cameraCanvas.onFrame = () => {};
+  // cameraCanvas.onFrame = () => {};
 }
 
 export const App = {
+  camera: new WebCam(),
+  template: Template,
+  views: Views,
   pauseDetector: pauseDetector,
   startDetector: startFaceDetector,
   loadDetector: () => {
@@ -53,18 +58,18 @@ export const App = {
     bridge.destroy();
   },
   captureFrame: () => {
-    processorFn(cameraCanvas.outputCtx);
+    // processorFn(cameraCanvas.outputCtx);
 
-    const frame = cameraCanvas.outputCanvas.toDataURL("image/jpeg").slice(23);
+    // const frame = cameraCanvas.outputCanvas.toDataURL("image/jpeg").slice(23);
 
-    return frame;
+    // return frame;
   },
   resetAnchor: () => {
     bridge.resetAnchor();
   },
   mount: (domEl: HTMLElement) => {
-    cameraCanvas = new WebCam(domEl);
-    return cameraCanvas;
+    // cameraCanvas = new WebCam(domEl);
+    // return cameraCanvas;
   }
 }
 

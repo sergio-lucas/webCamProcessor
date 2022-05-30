@@ -1,4 +1,4 @@
-import { EventEmitter } from "./EventEmitter";
+import { EventEmitter } from "./EventEmitter/EventEmitter";
 
 interface FaceParams {
   face_image: any;
