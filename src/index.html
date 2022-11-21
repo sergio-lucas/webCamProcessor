@@ -10,10 +10,37 @@
   <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/tf-tflite.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script> -->
+  <style>
+      .webCam__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .webCam__container {
+    position: relative;
+    width: 263px;
+    height: 200px;
+    margin: 0 auto;
+  }
+    .webCam__preview {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      -moz-transform: scaleX(-1);
+      -ms-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      border: 3px solid transparent;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="camera_holder"></div>
+  <div class="webCam__wrapper">
+    <div class="webCam__container">
+      <canvas id="camera_preview" class="webCam__preview"></canvas>
+    </div>
+  </div>
 </body>
 
 </html>

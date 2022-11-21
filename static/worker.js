@@ -1,8 +1,14 @@
-importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js");
-importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/tf-tflite.min.js");
-importScripts("https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js");
-
-importScripts("wasm_library.js");
+// extract this file on local server
+// minify on build
+// move to ts folder
+try {
+  importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js");
+  importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/tf-tflite.min.js");
+  importScripts("https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js");
+  importScripts("wasm_library.js");
+} catch (e) {
+  throw new Error("Error loading library")
+}
 
 let face_processor;
 let faceChecker;
@@ -17,7 +23,7 @@ const loadDeps = async (faceCheckerConfig) => {
 
       postMessage({ type: 'load' });
     } catch (e) {
-      postMessage({ type: 'failed' });
+      postMessage({ type: 'failed', payload: e });
       console.error(e);
       throw new Error("Could not load face detector")
     }
@@ -103,7 +109,7 @@ const processFrame = (rgba, rgbaBuffer) => {
 
   postMessage({
     type: 'detect',
-    data: faceData
+    payload: faceData
   }, [faceData.face_image.buffer]);
 }
 

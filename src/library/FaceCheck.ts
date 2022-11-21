@@ -1,21 +1,27 @@
+const FPSMeter = require('fps-m');
 import { WebCam } from './WebCam';
 import { FaceCheckBridge } from './FaceCheckBridge';
 import { throttle } from '../helpers';
+import {getConfig} from '../helpers/config';
 
-let cameraCanvas: WebCam = null;
+let cameraCanvas:WebCam = null;
 const bridge = new FaceCheckBridge("worker.js");
 
 const processorFn = (context: CanvasRenderingContext2D | null) => {
-    const rgba = context.getImageData(0, 0, 640, 480);
+  const rgba = context.getImageData(0, 0, 640, 480);
 
-      bridge.process_frame({
-          originImage: rgba
-        }, [rgba.data.buffer]);
+  bridge.process_frame({
+      originImage: rgba
+    }, [rgba.data.buffer]);
 };
 
 const startFaceDetector = () => {
-  cameraCanvas.onFrame = throttle(processorFn, 1000 / 30);;
+  cameraCanvas.onRenderFrame = throttle(processorFn, 1000 / 30);;
 };
+
+const stopFaceDetector = () => {
+  cameraCanvas.onRenderFrame = () => {};
+}
 
 const faceCheckerConfig = {
   face_confidence_threshold: 2,
@@ -38,13 +44,12 @@ bridge.on("detect", (data) => {
   console.log("detected");
   // startFaceDetector();
 });
-
-const pauseDetector = () => {
-  cameraCanvas.onFrame = () => {};
-}
+bridge.on("error", (msg) => {
+  console.log(msg);
+})
 
 export const App = {
-  pauseDetector: pauseDetector,
+  pauseDetector: stopFaceDetector,
   startDetector: startFaceDetector,
   loadDetector: () => {
     bridge.preloadFaceCheck(faceCheckerConfig);
@@ -53,18 +58,27 @@ export const App = {
     bridge.destroy();
   },
   captureFrame: () => {
-    processorFn(cameraCanvas.outputCtx);
+    // processorFn(cameraCanvas.outputCtx);
 
-    const frame = cameraCanvas.outputCanvas.toDataURL("image/jpeg").slice(23);
+    // const frame = cameraCanvas.outputCanvas.toDataURL("image/jpeg").slice(23);
 
-    return frame;
+    // return frame;
   },
   resetAnchor: () => {
     bridge.resetAnchor();
   },
-  mount: (domEl: HTMLElement) => {
+  mount: (domEl: HTMLCanvasElement, config: any = {}) => {
+    const appConfig = getConfig(config);
+    if (appConfig.dev) {
+      (new FPSMeter({ui: true})).start();
+    }
     cameraCanvas = new WebCam(domEl);
-    return cameraCanvas;
+    cameraCanvas.requestAccess()
+    // webcam.on("ready", () => {
+      
+    // })
+    // cameraCanvas = new WebCam(domEl);
+    // return cameraCanvas;
   }
 }
 

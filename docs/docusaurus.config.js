@@ -120,7 +120,8 @@ const config = {
           readme: "none",
           sidebar: {
             indexLabel: 'Overview'
-          }
+          },
+          includeExtension: false,
         },
       ],
     ],

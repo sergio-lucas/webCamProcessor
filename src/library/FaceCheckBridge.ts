@@ -1,26 +1,5 @@
 import { EventEmitter } from "./EventEmitter";
-
-interface FaceParams {
-  face_image: any;
-  face: {
-      sW: number;
-      sH: number;
-      dX: number;
-      dY: number;
-      dW: any;
-      dH: any;
-      crX: number;
-      crY: number;
-      crW: number;
-      crH: number;
-  };
-  dt: number;
-}
-
-interface IFaceCheckEvents {
-  ['load']: () => void;
-  ['detect']: (data: { type: string, face: FaceParams }) => void;
-}
+import {BridgeReceivedMessage, IFaceCheckEvents, BridgePostMessage, BridgePostMessageTypes} from "./interfaces";
 
 export declare interface FaceCheckBridge {
   on<U extends keyof IFaceCheckEvents>(event: U, callback: IFaceCheckEvents[U]): void;
@@ -37,23 +16,31 @@ export class FaceCheckBridge extends EventEmitter {
     this.worker = new Worker(this.url);
 
     this.worker.onmessage = this.onmessageReceive.bind(this);
+    this.worker.onerror = this.onError.bind(this);
   }
-  onmessageReceive(ev: MessageEvent<any>) {
-    if (!ev.data.type) return;
-    this.emit(ev.data.type, ev.data.data)
+  onmessageReceive(ev: MessageEvent<BridgeReceivedMessage>) {
+    this.emit(ev.data.type, ev.data.payload)
+  }
+
+  onError(ev: ErrorEvent) {
+    this.emit(ev.type, ev.message)
+  }
+
+  postMessage(message: BridgePostMessage, transferableObject?: Transferable[]) {
+    this.worker.postMessage(message, transferableObject);
   }
 
   preloadFaceCheck(data: any) {
     this.init();
-    this.worker.postMessage({type: "load", payload: data})
+    this.postMessage({type: BridgePostMessageTypes.LOAD, payload: data})
   }
 
   process_frame(data: { originImage: ImageData }, transfer: Transferable[]) {
-    this.worker.postMessage({type: "process_frame", payload: data }, transfer);
+    this.postMessage({type: BridgePostMessageTypes.PROCESS_FRAME, payload: data }, transfer);
   }
 
   resetAnchor() {
-    this.worker.postMessage({type: "reset_anchor"})
+    this.postMessage({type: BridgePostMessageTypes.RESET_ANCHOR})
   }
 
   destroy() {

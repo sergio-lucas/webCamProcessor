@@ -1,12 +1,6 @@
 import { IWebCamEvents, EventType } from './IWebCamEvents';
 import { EventEmitter } from './EventEmitter';
-
-import { dom } from '../helpers';
-
-import styles from './css/style.module.scss';
-
-
-
+import {dom} from '../helpers/dom';
 
 export declare interface WebCam {
   on<U extends keyof IWebCamEvents>(event: U, callback: IWebCamEvents[U]): void;
@@ -20,146 +14,95 @@ enum State {
 
 
 export class WebCam extends EventEmitter {
-  container: HTMLElement;
-  camView: HTMLElement;
-  video: HTMLVideoElement;
-  state: State;
-  outputCanvas: HTMLCanvasElement;
-  outputCtx: CanvasRenderingContext2D | null;
-  stream: MediaStream;
+  /**
+   * My diary.
+   * @private
+   */
+  __state: State = State.Stop;
+  __stream: MediaStream;
+  canvasElement: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+  video: any;
+
+  constructor(canvasElement: HTMLCanvasElement) {
+    super();
+    this.canvasElement = canvasElement;
+    this.ctx = canvasElement.getContext( "2d" );
+
+    this.video = dom.crEl("video");
+    this.video.addEventListener( "canplay", this.__onCameraReady.bind(this), false );
+    this.video.autoplay = true;
+  }
 
   /**
-   * Creates an instance of WebCam.
-   * @param {HTMLElement} container
-   * @memberof WebCam
-   */
-  constructor(container: HTMLElement) {
-    super();
-    if (!container) {
-      throw new Error("Please provide a DOM element");
-    }
-
-    this.container = container;
-    this.camView = this.__createView();
-    this.state = State.Stop;
-
-    // resize
-
-    this.container.appendChild(this.camView);
-
-    this.__startup();
-    return this;
+    * @private
+  */
+  __onCameraReady():void {
+    this.canvasElement.width = this.video.videoWidth;
+    this.canvasElement.height = this.video.videoHeight;
+    window.requestAnimationFrame(this.__renderFrame.bind(this))
   }
 
-  onFrame(canvasCtx: CanvasRenderingContext2D | null) {}
-
-  get camera_preview(): HTMLCanvasElement {
-    return this.camView.querySelector('#camera_preview');
+  __renderFrame(): void {
+    this.ctx.drawImage( this.video, 0, 0, 640, 480 );
+    this.onRenderFrame(this.ctx);
+    window.requestAnimationFrame( this.__renderFrame.bind(this) );
   }
 
-  private __createView() {
-    const view = dom.crEl("div");
-    view.className = styles.webCam;
-    view.innerHTML = `
-      <div class="${styles.webCam__wrapper}">
-        <div class="${styles.webCam__container}">
-          <canvas id="camera_preview" class="${styles.webCam__preview}"></canvas>
-        </div>
-        <div class="${styles.webCam__reloadContainer}">
-          <button type="button" class="camera__reload_btn"></button>
-        </div>
-        <div class="${styles.webCam__infoContainer}">
-          <a class="${styles.webCam__setupLink}" href="#">How to set up camera</a>
-        </div>
-      </div>
-    `;
-
-    return view;
-  }
-
-  private __startup() {
-    this.video = dom.crEl("video");
-    this.video.addEventListener( "canplay", this.onCameraReady.bind(this), false );
-    this.outputCanvas = this.camera_preview;
-    this.outputCtx = this.camera_preview.getContext( "2d" );
-    this.video.autoplay = true;
-    this.__requestAccess();
-  }
-
-  private __nextFrame(ms: number) {
-    this.outputCtx.drawImage( this.video, 0, 0, 640, 480 );
-
-    if( this.state === State.Running ) {
-      this.onFrame(this.outputCtx);
-      window.requestAnimationFrame( this.__nextFrame.bind(this) );
-    }
-  }
-
-  private onCameraReady() {
-    this.outputCanvas.width = this.video.videoWidth;
-    this.outputCanvas.height = this.video.videoHeight;
-
-    this.emit(EventType.Ready);
-  }
-
-  private __requestAccess() {
-    navigator.mediaDevices.getUserMedia({"video" : true })
-      .then(this.onStream.bind(this))
-      .catch(this.onFail.bind(this));
-  }
-
-  private onStream(stream: MediaStream) {
-    this.stream = stream;
+  __onstartStream(stream: MediaStream): void {
+    this.__state = State.Running;
     this.video.srcObject = stream;
-
-    this.state = State.Running;
-
-    window.requestAnimationFrame(this.__nextFrame.bind(this))
   }
 
-  private onFail(error: any) {
-    console.error(error);
+  __onFailStream(error: any): void {
     this.emit(EventType.Failed, error);
     throw new Error("No camera access");
   }
 
+  __onStopStream(): void {
+    this.__state = State.Stop;
+    this.emit(EventType.Pause);
+  }
+
+  get isStreamActive(): Boolean {
+    return this.__stream?.active ?? false;
+  }
+
+  get stream(): MediaStream {
+    return this.__stream;
+  }
+
   /**
-   * Pause camera streaming
+   * Request camera stream
    *
    * @memberof WebCam
    */
-  pause() {
-    if (this.state === State.Running) {
-      if (this.stream) {
-        this.stream.getTracks().forEach(track => {
-          track.stop();
-        });
-      }
-      this.state = State.Pause;
-      this.emit(EventType.Pause);
+  requestAccess(): Promise<MediaStream> {
+    if (this.__state === State.Stop) {
+      return navigator.mediaDevices.getUserMedia({"video" : true })
+        .then(this.__onstartStream.bind(this))
+        .catch(this.__onFailStream.bind(this))
     }
   }
 
   /**
-   * Resume camera streaming
+   * Stop camera streaming
    *
    * @memberof WebCam
    */
-  resume() {
-    if (this.state !== State.Running) {
-      this.__requestAccess();
+  stopStream() {
+    if (this.__state === State.Running) {
+      this.__stream.getTracks().forEach(track => {
+        track.stop();
+      });
+      this.__onStopStream();
     }
   }
 
   /**
-   * Stop camera streaming and remove view template
+   * Call this action on each frame request
    *
    * @memberof WebCam
    */
-  destroy() {
-    this.pause();
-    this.container.removeChild(this.camView);
-
-    this.emit(EventType.Destroy);
-  }
+  onRenderFrame(context: CanvasRenderingContext2D) {}
 }
