@@ -121,7 +121,7 @@ const config = {
           sidebar: {
             indexLabel: 'Overview'
           },
-          includeExtension: false,
+          // includeExtension: false,
         },
       ],
     ],
