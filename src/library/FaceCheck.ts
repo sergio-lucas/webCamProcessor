@@ -1,4 +1,4 @@
-const FPSMeter = require('fps-m');
+// const FPSMeter = require('fps-m');
 import { WebCam } from './WebCam';
 import { FaceCheckBridge } from './FaceCheckBridge';
 import { throttle } from '../helpers';
@@ -69,9 +69,9 @@ export const App = {
   },
   mount: (domEl: HTMLCanvasElement, config: any = {}) => {
     const appConfig = getConfig(config);
-    if (appConfig.dev) {
-      (new FPSMeter({ui: true})).start();
-    }
+    // if (appConfig.dev) {
+    //   (new FPSMeter({ui: true})).start();
+    // }
     cameraCanvas = new WebCam(domEl);
     cameraCanvas.requestAccess()
     // webcam.on("ready", () => {
