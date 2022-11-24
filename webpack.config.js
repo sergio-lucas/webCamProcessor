@@ -35,15 +35,12 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           // The `injectType`  option can be avoided because it is default behaviour
-          { loader: "style-loader" },
-          { loader: "css-loader", options: { modules: true } },
-          { loader: "sass-loader" }
         ],
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.css'],
+    extensions: ['.tsx', '.ts', '.js'],
     alias: {
       'utils': path.resolve(__dirname, './src/library/detector/utils')
     }
