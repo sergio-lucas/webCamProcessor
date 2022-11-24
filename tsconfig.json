@@ -22,7 +22,7 @@
     "node_modules",
     "docs",
     "dist",
-    "webpack.config.js",
+    "webpack.*.js",
     "src/helpers",
   ]
 }

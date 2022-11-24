@@ -1,15 +1,15 @@
 # Face detector for web browser
 This detector was tested on different browsers;
 
-- obfuscation of destination code for
-- minify code changes
-- check api docs build for
++ obfuscation of destination code for
++ minify code changes
++ check api docs build for
 - move worker into detector folder (move face_mesh, utils, wasm_helper to helper folder in detector folder)
+- convert webworker to ts file process it and minimize
 - add examples to docs
-- add link to documentation
++ add link to documentation
 - unit tests
 - integration tests for main detector
-- convert webworker to ts file process it and minimize
 - remove unused files
 - refactor config files
 - download external dependencies and put it into repo
@@ -44,4 +44,4 @@ This website is built using [Docusaurus 2](https://docusaurus.io/), a modern sta
 
 ### API Documentation
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+API docs can be found here: [API](https://sergio-lucas.github.io/webCamProcessor/docs/api/), a modern static website generator.

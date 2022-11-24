@@ -3,8 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
   target: ['web', 'es5'],
   entry: {
     vanilla: {
@@ -31,12 +29,6 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          // The `injectType`  option can be avoided because it is default behaviour
-        ],
-      },
     ],
   },
   resolve: {
@@ -50,9 +42,6 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
     clean: true,
   },
-  devServer: {
-    static: './public',
-  },
 
   plugins: [
     new HtmlWebpackPlugin({
@@ -63,7 +52,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: path.resolve(__dirname, "./static") },
-        { from: path.resolve(__dirname, "./src/library/detector/package/utils_bg.wasm") },
+        // { from: path.resolve(__dirname, "./src/library/detector/package/utils_bg.wasm") },
         // { from: path.resolve(__dirname, "./src/detector/assets"),
         //   to: path.resolve(__dirname, 'dist/detector/assets'),
         // },
