@@ -72,14 +72,14 @@ const cropImage = (rgba) => {
     throw new Error("Roi error");
   }
 
-  const bufferSize = wasm.encode_jpeg(bufferData.source, maxWidth, maxHeight, bufferData.target, 85); // TODO
+  const bufferSize = wasm.encode_jpeg(bufferData.source, maxWidth, maxHeight, bufferData.target, 85); // TODO: Make image quality configurable
   const encoded = bufferData.target.slice(0, bufferSize);
 
   return {
     face_image: encoded,
     face: {
-      sW: 640, // TODO
-      sH: 480, // TODO
+      sW: 640, // TODO: Extract video params
+      sH: 480, // TODO: Extract video params
       dX: faceX - faceWidth / 2,
       dY: faceY - faceHeight / 2,
       dW: faceWidth,
@@ -89,7 +89,7 @@ const cropImage = (rgba) => {
       crW: facePadWidth,
       crH: facePadHeight
     },
-    dt: 0 // TODO
+    dt: 0 // TODO: processing time. find way how to implement this
   }
 }
 const processFrame = (rgba, rgbaBuffer) => {

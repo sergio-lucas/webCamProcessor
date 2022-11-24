@@ -8,9 +8,14 @@ export declare interface FaceCheckBridge {
 export class FaceCheckBridge extends EventEmitter {
   worker: Worker;
   url: string | URL;
+  __instance: FaceCheckBridge;
   constructor(url: string | URL) {
     super();
+    if (this.__instance) {
+      throw new Error("You can have only 1 instance of FaceDetector due to performance issues")
+    }
     this.url = url;
+    this.__instance = this;
   }
   private init() {
     this.worker = new Worker(this.url);

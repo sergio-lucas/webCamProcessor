@@ -1,3 +1,4 @@
+// Uses for documentation purpose
 export * from './interfaces';
 export * from './EventEmitter';
 export * from './IWebCamEvents';
