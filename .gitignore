@@ -36,6 +36,6 @@ website/i18n/**/*
 #!website/i18n/fr/**/*
 
 .netlify
-public
+public/
 # Ignore generate Typescript docs
 docs/docs/api
