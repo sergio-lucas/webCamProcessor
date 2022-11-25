@@ -27,10 +27,10 @@ export class WebCam extends EventEmitter {
   constructor(canvasElement: HTMLCanvasElement) {
     super();
     this.canvasElement = canvasElement;
-    this.ctx = canvasElement.getContext( "2d" );
+    this.ctx = canvasElement.getContext( '2d' );
 
-    this.video = dom.crEl("video");
-    this.video.addEventListener( "canplay", this.__onCameraReady.bind(this), false );
+    this.video = dom.crEl('video');
+    this.video.addEventListener( 'canplay', this.__onCameraReady.bind(this), false );
     this.video.autoplay = true;
   }
 
@@ -40,7 +40,7 @@ export class WebCam extends EventEmitter {
   __onCameraReady():void {
     this.canvasElement.width = this.video.videoWidth;
     this.canvasElement.height = this.video.videoHeight;
-    window.requestAnimationFrame(this.__renderFrame.bind(this))
+    window.requestAnimationFrame(this.__renderFrame.bind(this));
   }
 
   __renderFrame(): void {
@@ -56,7 +56,7 @@ export class WebCam extends EventEmitter {
 
   __onFailStream(error: any): void {
     this.emit(EventType.Failed, error);
-    throw new Error("No camera access");
+    throw new Error('No camera access');
   }
 
   __onStopStream(): void {
@@ -64,7 +64,7 @@ export class WebCam extends EventEmitter {
     this.emit(EventType.Pause);
   }
 
-  get isStreamActive(): Boolean {
+  get isStreamActive(): boolean {
     return this.__stream?.active ?? false;
   }
 
@@ -79,9 +79,9 @@ export class WebCam extends EventEmitter {
    */
   requestAccess(): Promise<MediaStream> {
     if (this.__state === State.Stop) {
-      return navigator.mediaDevices.getUserMedia({"video" : true })
+      return navigator.mediaDevices.getUserMedia({'video' : true })
         .then(this.__onstartStream.bind(this))
-        .catch(this.__onFailStream.bind(this))
+        .catch(this.__onFailStream.bind(this));
     }
   }
 
@@ -104,5 +104,6 @@ export class WebCam extends EventEmitter {
    *
    * @memberof WebCam
    */
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onRenderFrame(context: CanvasRenderingContext2D) {}
 }

@@ -14,6 +14,7 @@ This detector was tested on different browsers;
 - refactor config files
 - download external dependencies and put it into repo
 - eslint+prettier+airbnb
+- validate eslint errors before push on commit!
 - remove any from code
 - make this repo private. deploy docs to the digital ocean;deploy built source to the npm
 - fix Error Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
