@@ -1,8 +1,8 @@
 export enum EventType {
-  Ready = "ready",
-  Pause = "pause",
-  Destroy = "destroy",
-  Failed = "failed"
+  Ready = 'ready',
+  Pause = 'pause',
+  Destroy = 'destroy',
+  Failed = 'failed'
 };
 export interface IWebCamEvents {
   [EventType.Pause]: () => void;

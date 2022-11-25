@@ -8,10 +8,10 @@ import {defaultConfig} from '../helpers/config';
 export const faceDetector = (config: any = defaultConfig) => {
   const {detector} = config;
   // 
-  const bridge = new FaceCheckBridge("worker.js");
+  const bridge = new FaceCheckBridge('worker.js');
   bridge.preloadFaceCheck(detector);
-  bridge.on("error", () => {
-    console.log('load error')
+  bridge.on('error', () => {
+    console.log('load error');
     // retry preload on Error loading library/ define custom error type
     // clear on forceStop
   });
@@ -19,8 +19,8 @@ export const faceDetector = (config: any = defaultConfig) => {
     const rgba = context.getImageData(0, 0, 640, 480);
 
     bridge.process_frame({
-        originImage: rgba
-      }, [rgba.data.buffer]);
+      originImage: rgba
+    }, [rgba.data.buffer]);
   };
   return (canvas: HTMLCanvasElement) => {
     const cameraCanvas: WebCam = new WebCam(canvas);
@@ -38,13 +38,14 @@ export const faceDetector = (config: any = defaultConfig) => {
     };
 
     const stopDetecting = () => {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       cameraCanvas.onRenderFrame = () => {};
     };
 
     const takeSnapshotFromStream = () => {
       processorFn(cameraCanvas.ctx);
 
-      return cameraCanvas.canvasElement.toDataURL("image/jpeg").slice(23);
+      return cameraCanvas.canvasElement.toDataURL('image/jpeg').slice(23);
     };
 
     const stop = () => {
@@ -52,23 +53,24 @@ export const faceDetector = (config: any = defaultConfig) => {
     };
 
     const onDetect = (cb: any) => {//payload == data?
-      bridge.on("detect", cb);
+      bridge.on('detect', cb);
 
-      return () => bridge.off("detect", cb);
-    }
+      return () => bridge.off('detect', cb);
+    };
 
     const onError = (cb: any) => {//msg ==str
-      bridge.on("error", cb);
+      bridge.on('error', cb);
 
-      return () => bridge.off("error", cb);
+      return () => bridge.off('error', cb);
     };
 
     const onLoad = (cb: any) => {
-      bridge.on("load", cb);
+      bridge.on('load', cb);
 
-      return () => bridge.off("load", cb);
+      return () => bridge.off('load', cb);
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const forceStop = () => {};
 
     return {
@@ -81,8 +83,8 @@ export const faceDetector = (config: any = defaultConfig) => {
       onError,
       onLoad,
       forceStop,
-    }
-  }
+    };
+  };
 };
 
 // const initiator = faceDetector(config);

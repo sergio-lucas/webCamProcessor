@@ -1,5 +1,5 @@
-import { EventEmitter } from "./EventEmitter";
-import {BridgeReceivedMessage, IFaceCheckEvents, BridgePostMessage, BridgePostMessageTypes} from "./interfaces";
+import { EventEmitter } from './EventEmitter';
+import {BridgeReceivedMessage, IFaceCheckEvents, BridgePostMessage, BridgePostMessageTypes} from './interfaces';
 
 export declare interface FaceCheckBridge {
   on<U extends keyof IFaceCheckEvents>(event: U, callback: IFaceCheckEvents[U]): void;
@@ -12,7 +12,7 @@ export class FaceCheckBridge extends EventEmitter {
   constructor(url: string | URL) {
     super();
     if (this.__instance) {
-      throw new Error("You can have only 1 instance of FaceDetector due to performance issues")
+      throw new Error('You can have only 1 instance of FaceDetector due to performance issues');
     }
     this.url = url;
     this.__instance = this;
@@ -24,11 +24,11 @@ export class FaceCheckBridge extends EventEmitter {
     this.worker.onerror = this.onError.bind(this);
   }
   onmessageReceive(ev: MessageEvent<BridgeReceivedMessage>) {
-    this.emit(ev.data.type, ev.data.payload)
+    this.emit(ev.data.type, ev.data.payload);
   }
 
   onError(ev: ErrorEvent) {
-    this.emit(ev.type, ev.message)
+    this.emit(ev.type, ev.message);
   }
 
   postMessage(message: BridgePostMessage, transferableObject?: Transferable[]) {
@@ -37,7 +37,7 @@ export class FaceCheckBridge extends EventEmitter {
 
   preloadFaceCheck(data: any) {
     this.init();
-    this.postMessage({type: BridgePostMessageTypes.LOAD, payload: data})
+    this.postMessage({type: BridgePostMessageTypes.LOAD, payload: data});
   }
 
   process_frame(data: { originImage: ImageData }, transfer: Transferable[]) {
@@ -45,7 +45,7 @@ export class FaceCheckBridge extends EventEmitter {
   }
 
   resetAnchor() {
-    this.postMessage({type: BridgePostMessageTypes.RESET_ANCHOR})
+    this.postMessage({type: BridgePostMessageTypes.RESET_ANCHOR});
   }
 
   destroy() {

@@ -1,6 +1,8 @@
+type CallbackFn = (a: string) => void;
+
 export interface IEventEmitter {
-  on: (event: string, callback: Function) => void;
-  off: (event: string, callback: Function) => void;
+  on: (event: string, callback: CallbackFn) => void;
+  off: (event: string, callback: CallbackFn) => void;
 }
 // TODO: write test cases for this file
 
@@ -11,10 +13,10 @@ export class EventEmitter implements IEventEmitter {
    * Add event listener. Push it to the events array and invoke by calling emit
    *
    * @param {string} event
-   * @param {Function} callback
+   * @param {CallbackFn} callback
    * @memberof EventEmitter
    */
-  on(event: string, callback: Function) {
+  on(event: string, callback: CallbackFn) {
     !this.events.get(event) && this.events.set(event, []);
     this.events.get(event).push(callback);
   }
@@ -25,20 +27,20 @@ export class EventEmitter implements IEventEmitter {
    * @param {Function} callback
    * @memberof EventEmitter
    */
-  off(event: string, callback: Function) {
-    const eventToDelete = this.events.get(event).filter((eventCb: Function) => eventCb === callback);
+  off(event: string, callback: CallbackFn) {
+    const eventToDelete = this.events.get(event).filter((eventCb: CallbackFn) => eventCb === callback);
 
     if (eventToDelete.length !== 0) {
-       this.events.set(event, this.events.get(event).filter((cbs: any) => cbs !== callback))
+      this.events.set(event, this.events.get(event).filter((cbs: any) => cbs !== callback));
     }
 
     // eventToDelete.forEach(this.events.delete);
   }
-  protected emit(event: string, payload?: Object) {
+  protected emit(event: string, payload?: any) {
     const eventArray = this.events.get(event);
 
     if (eventArray?.length > 0) {
-      eventArray.forEach((callback: Function) => callback.call(null, payload));
+      eventArray.forEach((callback: CallbackFn) => callback.call(null, payload));
     }
   }
 }

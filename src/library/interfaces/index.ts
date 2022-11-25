@@ -10,9 +10,9 @@ export interface BridgeReceivedMessage {
 };
 
 export enum BridgePostMessageTypes {
-  "LOAD" = "load",
-  "PROCESS_FRAME" = "process_frame",
-  "RESET_ANCHOR" = "reset_anchor",
+  'LOAD' = 'load',
+  'PROCESS_FRAME' = 'process_frame',
+  'RESET_ANCHOR' = 'reset_anchor',
 }
 
 export interface BridgePostMessage {
