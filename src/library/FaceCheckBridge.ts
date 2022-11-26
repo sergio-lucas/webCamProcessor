@@ -1,4 +1,4 @@
-import { EventEmitter } from './EventEmitter';
+import {EventEmitter} from './EventEmitter';
 import {BridgeReceivedMessage, IFaceCheckEvents, BridgePostMessage, BridgePostMessageTypes} from './interfaces';
 
 export declare interface FaceCheckBridge {
@@ -7,28 +7,35 @@ export declare interface FaceCheckBridge {
 
 export class FaceCheckBridge extends EventEmitter {
   worker: Worker;
+
   url: string | URL;
-  __instance: FaceCheckBridge;
+
+  // eslint-disable-next-line no-use-before-define
+  instance: FaceCheckBridge;
+
   constructor(url: string | URL) {
     super();
-    if (this.__instance) {
+    if (this.instance) {
       throw new Error('You can have only 1 instance of FaceDetector due to performance issues');
     }
     this.url = url;
-    this.__instance = this;
+    this.instance = this;
   }
+
   private init() {
     this.worker = new Worker(this.url);
 
     this.worker.onmessage = this.onmessageReceive.bind(this);
     this.worker.onerror = this.onError.bind(this);
   }
+
   onmessageReceive(ev: MessageEvent<BridgeReceivedMessage>) {
     this.emit(ev.data.type, ev.data.payload);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   onError(ev: ErrorEvent) {
-    this.emit(ev.type, ev.message);
+    // this.emit(ev.type, ev.message);
   }
 
   postMessage(message: BridgePostMessage, transferableObject?: Transferable[]) {
@@ -41,7 +48,7 @@ export class FaceCheckBridge extends EventEmitter {
   }
 
   process_frame(data: { originImage: ImageData }, transfer: Transferable[]) {
-    this.postMessage({type: BridgePostMessageTypes.PROCESS_FRAME, payload: data }, transfer);
+    this.postMessage({type: BridgePostMessageTypes.PROCESS_FRAME, payload: data}, transfer);
   }
 
   resetAnchor() {

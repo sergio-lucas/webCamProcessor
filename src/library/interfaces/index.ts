@@ -1,12 +1,15 @@
-export enum BridgeReceivedMessageTypes {
-  LOAD = 'LOAD',
-  FAILED = 'FAILED',
-  DETECT = 'DETECT',
-};
+// export enum BridgeReceivedMessageTypes {
+//   LOAD = 'LOAD',
+//   FAILED = 'FAILED',
+//   DETECT = 'DETECT',
+// };
+
+export type BridgeReceivedMessageTypes = 'load' | 'failed' | 'detect' | 'error';
 
 export interface BridgeReceivedMessage {
   type: BridgeReceivedMessageTypes,
-  payload?: any
+  payload?: any,
+  error?: any,
 };
 
 export enum BridgePostMessageTypes {
@@ -18,13 +21,6 @@ export enum BridgePostMessageTypes {
 export interface BridgePostMessage {
   type: BridgePostMessageTypes,
   payload?: any
-}
-
-export interface IFaceCheckEvents {
-  ['load']: () => void;
-  ['detect']: (data: { type: string, face: FaceParams }) => void;
-  ['error']: (msg: string) => void;
-  ['failed']: (msg: any) => void; // TODO: check type
 }
 
 export interface FaceParams {
@@ -42,4 +38,11 @@ export interface FaceParams {
       crH: number;
   };
   dt: number;
+}
+
+export interface IFaceCheckEvents {
+  ['load']: () => void;
+  ['detect']: (data: { type: string, face: FaceParams }) => void;
+  ['error']: (msg: string) => void;
+  ['failed']: (msg: any) => void; // TODO: check type
 }

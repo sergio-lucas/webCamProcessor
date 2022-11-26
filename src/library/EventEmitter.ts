@@ -1,8 +1,8 @@
-type CallbackFn = (a: string) => void;
+type EmitterPayload = (payload: any) => void;
 
 export interface IEventEmitter {
-  on: (event: string, callback: CallbackFn) => void;
-  off: (event: string, callback: CallbackFn) => void;
+  on: (event: string, callback: EmitterPayload) => void;
+  off: (event: string, callback: EmitterPayload) => void;
 }
 // TODO: write test cases for this file
 
@@ -13,34 +13,38 @@ export class EventEmitter implements IEventEmitter {
    * Add event listener. Push it to the events array and invoke by calling emit
    *
    * @param {string} event
-   * @param {CallbackFn} callback
+   * @param {EmitterPayload} callback
    * @memberof EventEmitter
    */
-  on(event: string, callback: CallbackFn) {
-    !this.events.get(event) && this.events.set(event, []);
+  on(event: string, callback: EmitterPayload) {
+    if (!this.events.get(event)) {
+      this.events.set(event, []);
+    }
     this.events.get(event).push(callback);
   }
+
   /**
    * Remove event listener. Remove callback from array
    *
    * @param {string} event
-   * @param {Function} callback
+   * @param {EmitterPayload} callback
    * @memberof EventEmitter
    */
-  off(event: string, callback: CallbackFn) {
-    const eventToDelete = this.events.get(event).filter((eventCb: CallbackFn) => eventCb === callback);
+  off(event: string, callback: EmitterPayload) {
+    const eventToDelete = this.events.get(event).filter((eventCb: EmitterPayload) => eventCb === callback);
 
     if (eventToDelete.length !== 0) {
-      this.events.set(event, this.events.get(event).filter((cbs: any) => cbs !== callback));
+      this.events.set(event, this.events.get(event).filter((cbs: EmitterPayload) => cbs !== callback));
     }
 
     // eventToDelete.forEach(this.events.delete);
   }
-  protected emit(event: string, payload?: any) {
+
+  protected emit(event: string, payload?: EmitterPayload) {
     const eventArray = this.events.get(event);
 
     if (eventArray?.length > 0) {
-      eventArray.forEach((callback: CallbackFn) => callback.call(null, payload));
+      eventArray.forEach((callback: EmitterPayload) => callback.call(null, payload));
     }
   }
 }

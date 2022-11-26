@@ -52,13 +52,13 @@ export const faceDetector = (config: any = defaultConfig) => {
       bridge.destroy();
     };
 
-    const onDetect = (cb: any) => {//payload == data?
+    const onDetect = (cb: any) => {// payload == data?
       bridge.on('detect', cb);
 
       return () => bridge.off('detect', cb);
     };
 
-    const onError = (cb: any) => {//msg ==str
+    const onError = (cb: any) => {// msg ==str
       bridge.on('error', cb);
 
       return () => bridge.off('error', cb);
@@ -91,5 +91,5 @@ export const faceDetector = (config: any = defaultConfig) => {
 // const detector = initiator(canvas);
 // const unsubscribe = detector.onDetect(fn)
 // const unsubscribe()
-//const unsubscribe = detector.onLoad(fn)
-//fn = startFaceDetector();??
+// const unsubscribe = detector.onLoad(fn)
+// fn = startFaceDetector();??

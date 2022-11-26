@@ -1,5 +1,5 @@
-import { IWebCamEvents, EventType } from './IWebCamEvents';
-import { EventEmitter } from './EventEmitter';
+import {IWebCamEvents, EventType} from './IWebCamEvents';
+import {EventEmitter} from './EventEmitter';
 import {dom} from '../helpers/dom';
 
 export declare interface WebCam {
@@ -18,10 +18,14 @@ export class WebCam extends EventEmitter {
    * My diary.
    * @private
    */
-  __state: State = State.Stop;
-  __stream: MediaStream;
+  state: State = State.Stop;
+
+  stream: MediaStream;
+
   canvasElement: HTMLCanvasElement;
+
   ctx: CanvasRenderingContext2D;
+
   video: any;
 
   constructor(canvasElement: HTMLCanvasElement) {
@@ -30,46 +34,45 @@ export class WebCam extends EventEmitter {
     this.ctx = canvasElement.getContext( '2d' );
 
     this.video = dom.crEl('video');
-    this.video.addEventListener( 'canplay', this.__onCameraReady.bind(this), false );
+    this.video.addEventListener( 'canplay', this.onCameraReady.bind(this), false );
     this.video.autoplay = true;
   }
 
   /**
     * @private
   */
-  __onCameraReady():void {
+  onCameraReady():void {
+    const test = 1;
     this.canvasElement.width = this.video.videoWidth;
     this.canvasElement.height = this.video.videoHeight;
-    window.requestAnimationFrame(this.__renderFrame.bind(this));
+    window.requestAnimationFrame(this.renderFrame.bind(this));
   }
-
-  __renderFrame(): void {
+  
+  renderFrame() {
     this.ctx.drawImage( this.video, 0, 0, 640, 480 );
     this.onRenderFrame(this.ctx);
-    window.requestAnimationFrame( this.__renderFrame.bind(this) );
+    window.requestAnimationFrame( this.renderFrame.bind(this) );
+
+    return '';
   }
 
-  __onstartStream(stream: MediaStream): void {
-    this.__state = State.Running;
+  onstartStream(stream: MediaStream): void {
+    this.state = State.Running;
     this.video.srcObject = stream;
   }
 
-  __onFailStream(error: any): void {
+  onFailStream(error: any): void {
     this.emit(EventType.Failed, error);
     throw new Error('No camera access');
   }
 
-  __onStopStream(): void {
-    this.__state = State.Stop;
+  onStopStream(): void {
+    this.state = State.Stop;
     this.emit(EventType.Pause);
   }
 
   get isStreamActive(): boolean {
-    return this.__stream?.active ?? false;
-  }
-
-  get stream(): MediaStream {
-    return this.__stream;
+    return this.stream?.active ?? false;
   }
 
   /**
@@ -78,11 +81,12 @@ export class WebCam extends EventEmitter {
    * @memberof WebCam
    */
   requestAccess(): Promise<MediaStream> {
-    if (this.__state === State.Stop) {
-      return navigator.mediaDevices.getUserMedia({'video' : true })
-        .then(this.__onstartStream.bind(this))
-        .catch(this.__onFailStream.bind(this));
+    if (this.state === State.Stop) {
+      return navigator.mediaDevices.getUserMedia({'video' : true})
+        .then(this.onstartStream.bind(this))
+        .catch(this.onFailStream.bind(this));
     }
+    return Promise.resolve(this.stream);
   }
 
   /**
@@ -91,11 +95,11 @@ export class WebCam extends EventEmitter {
    * @memberof WebCam
    */
   stopStream() {
-    if (this.__state === State.Running) {
-      this.__stream.getTracks().forEach(track => {
+    if (this.state === State.Running) {
+      this.stream.getTracks().forEach(track => {
         track.stop();
       });
-      this.__onStopStream();
+      this.onStopStream();
     }
   }
 
@@ -104,6 +108,6 @@ export class WebCam extends EventEmitter {
    *
    * @memberof WebCam
    */
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, class-methods-use-this
   onRenderFrame(context: CanvasRenderingContext2D) {}
 }
