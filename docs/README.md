@@ -1,28 +1,37 @@
 # Face detector for web browser
 This detector was tested on different browsers;
 
-+ obfuscation of destination code for
-+ minify code changes
-+ check api docs build for
-- move worker into detector folder (move face_mesh, utils, wasm_helper to helper folder in detector folder)
-- convert webworker to ts file process it and minimize
-- add examples to docs
-+ add link to documentation
-- unit tests
-- integration tests for main detector
-- remove unused files
-- refactor config files
-- download external dependencies and put it into repo
-- eslint+prettier+airbnb
-- validate eslint errors before push on commit!
-- remove any from code
-- make this repo private. deploy docs to the digital ocean;deploy built source to the npm
-- fix Error Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-data: {
+
+### API Documentation :card_index_dividers:	
+
+API docs can be found here: [API](https://sergio-lucas.github.io/webCamProcessor/docs/api/), a modern static website generator.
+
+### TODO checklist :white_check_mark:
+- [x] obfuscation of destination code for
+- [x] check api docs build for
+- [x] add link to documentation
+- [ ] minify code changes
+- [ ] move worker into detector folder (move face_mesh, utils, wasm_helper to helper folder in detector folder)
+- [ ] convert webworker to ts file process it and minimize
+- [ ] add examples to docs
+- [ ] unit tests
+- [ ] integration tests for main detector
+- [ ] remove unused files
+- [ ] refactor config files
+- [ ] download external dependencies and put it into repo
+- [ ] eslint+prettier+airbnb
+- [ ] validate eslint errors before push on commit!
+- [ ] remove any from code
+- [ ] fix Error Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+
+## Response example :information_source:	
+```
+{
+  face_image: encoded,
   errors: [
     9,
     11
-],
+  ],
   face: {
     "sW": 640,
     "sH": 480,
@@ -34,15 +43,7 @@ data: {
     "crY": 393,
     "crW": 226.5,
     "crH": 156
+  },
+  dt: 0
 }
-}
-
-
-### Examples & Usage
-
-API Docs can be found here:
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
-
-### API Documentation
-
-API docs can be found here: [API](https://sergio-lucas.github.io/webCamProcessor/docs/api/), a modern static website generator.
+```
