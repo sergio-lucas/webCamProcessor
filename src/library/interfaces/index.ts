@@ -23,22 +23,40 @@ export interface BridgePostMessage {
   payload?: any
 }
 
+/**
+ * Represents parameters for processing a face.
+ */
 export interface FaceParams {
+  /** The face image data. */
   face_image: any;
+  
+  /** 
+   * Details about the face.
+   */
   face: {
-      // Source width
-      sW: number;
-      /* Source height */
-      sH: number;
-      dX: number;
-      dY: number;
-      dW: any;
-      dH: any;
-      crX: number;
-      crY: number;
-      crW: number;
-      crH: number;
+    /** The source width of the face image. */
+    sW: number;
+    /** The source height of the face image. */
+    sH: number;
+    /** The destination X coordinate for rendering the face. */
+    dX: number;
+    /** The destination Y coordinate for rendering the face. */
+    dY: number;
+    /** The destination width for rendering the face. */
+    dW: any; // Type not specified
+    /** The destination height for rendering the face. */
+    dH: any; // Type not specified
+    /** The cropping X coordinate for the face. */
+    crX: number;
+    /** The cropping Y coordinate for the face. */
+    crY: number;
+    /** The cropping width for the face. */
+    crW: number;
+    /** The cropping height for the face. */
+    crH: number;
   };
+  
+  /** The timestamp of the face data. */
   dt: number;
 }
 
