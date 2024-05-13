@@ -26,7 +26,9 @@ export interface BridgePostMessage {
 export interface FaceParams {
   face_image: any;
   face: {
+      // Source width
       sW: number;
+      /* Source height */
       sH: number;
       dX: number;
       dY: number;
