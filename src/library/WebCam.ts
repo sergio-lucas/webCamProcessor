@@ -24,6 +24,7 @@ export class WebCam extends EventEmitter {
 
   canvasElement: HTMLCanvasElement;
 
+  /** WebCam context */
   ctx: CanvasRenderingContext2D;
 
   video: any;
