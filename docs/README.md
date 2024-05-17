@@ -1,4 +1,4 @@
-# Face detector for web browser
+# Face detector for web browser docs
 This detector was tested on different browsers;
 
 
