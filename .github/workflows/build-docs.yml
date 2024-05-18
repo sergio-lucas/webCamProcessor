@@ -14,30 +14,46 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16.18.1
-          cache: yarn
-      - name: Checkout Wiki
+      - name: Checkout main
         uses: actions/checkout@v2
         with:
-          repository: sergio-lucas/webCamProcessor.wiki.git
-          path: wiki
+          path: webCamProcessor
+
+      - name: Checkout wiki
+        uses: actions/checkout@v2
+        with:
+          repository: "sergio-lucas/webCamProcessor.wiki"
+          path: webCamProcessor.wiki
 
       - name: Install dependencies
         run: |
-          cd wiki
-          yarn
+          ls
+          # cd wiki
+          # yarn
+      # - uses: actions/checkout@v2
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: 16.18.1
+      #     cache: yarn
+      # - name: Checkout Wiki
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: sergio-lucas/webCamProcessor.wiki.git
+      #     path: wiki
 
-      - name: Commit and push changes to Wiki
-        run: |
-          yarn docs
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git add .
-          git commit -m "Add build artifact"
-          git push
+      # - name: Install dependencies
+      #   run: |
+      #     cd wiki
+      #     yarn
+
+      # - name: Commit and push changes to Wiki
+      #   run: |
+      #     yarn docs
+      #     git config --global user.name 'github-actions'
+      #     git config --global user.email 'github-actions@github.com'
+      #     git add .
+      #     git commit -m "Add build artifact"
+      #     git push
       
 
       # Popular action to deploy to GitHub Pages:
