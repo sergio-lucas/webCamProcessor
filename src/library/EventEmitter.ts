@@ -1,5 +1,6 @@
 /**
   * This module is a simple implementation of the EventEmitter pattern.
+  * 
   * It allows to subscribe/unsubscribe to events and emit them.
   * 
   * @module EventEmitter
@@ -20,6 +21,13 @@ export interface IEventEmitter {
  * @export
  * @class EventEmitter
  * @implements {IEventEmitter}
+ * 
+ * @example
+ * ```ts
+ * const emitter = new EventEmitter();
+ * emitter.on('event', (payload) => console.log(payload));
+ * emitter.emit('event', 'Hello, world!');
+ * ```
  */
 export class EventEmitter implements IEventEmitter {
   private events = new Map();
