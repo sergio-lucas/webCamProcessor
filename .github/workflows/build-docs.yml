@@ -16,18 +16,17 @@ jobs:
     steps:
       - name: Checkout main
         uses: actions/checkout@v2
-        with:
-          path: webCamProcessor
 
       - name: Checkout wiki
         uses: actions/checkout@v2
         with:
           repository: "sergio-lucas/webCamProcessor.wiki"
-          path: webCamProcessor.wiki
+          path: ./wiki
 
       - name: Install dependencies
         run: |
-          cd webCamProcessor.wiki
+          ls
+          cd wiki
           ls
           yarn
           yarn docs
