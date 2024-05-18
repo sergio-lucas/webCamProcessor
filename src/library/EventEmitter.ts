@@ -1,5 +1,13 @@
 type EmitterPayload = (payload: any) => void;
 
+/**
+ * This module is a simple implementation of the EventEmitter pattern.
+  * It allows to subscribe/unsubscribe to events and emit them.
+  * 
+  * @module EventEmitter
+  * 
+ */
+
 export interface IEventEmitter {
   on: (event: string, callback: EmitterPayload) => void;
   off: (event: string, callback: EmitterPayload) => void;
