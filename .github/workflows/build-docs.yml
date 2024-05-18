@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/build-docs.yml'
-      - 'docs/**'
       - 'src/**'
 
 jobs:
@@ -17,20 +16,28 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-      - uses: actions4gh/configure-wiki@v1
         with:
           node-version: 16.18.1
           cache: yarn
-      - name: Build website
-        working-directory: docs
-        run: |
-          yarn install --frozen-lockfile
-          yarn build
-
-      - name: Deploy to Wiki pages
-        uses: actions4gh/deploy-wiki@v1
+      - name: Checkout Wiki
+        uses: actions/checkout@v2
         with:
-          path: docs/build
+          repository: https://github.com/sergio-lucas/webCamProcessor.wiki.git
+          path: wiki
+
+      - name: Install dependencies
+        run: |
+          cd wiki
+          yarn
+
+      - name: Commit and push changes to Wiki
+        run: |
+          yarn docs
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add .
+          git commit -m "Add build artifact"
+          git push
       
 
       # Popular action to deploy to GitHub Pages:
