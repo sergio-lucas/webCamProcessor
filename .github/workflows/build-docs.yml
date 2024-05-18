@@ -22,7 +22,7 @@ jobs:
       - name: Checkout Wiki
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/sergio-lucas/webCamProcessor.wiki.git
+          repository: sergio-lucas/webCamProcessor.wiki.git
           path: wiki
 
       - name: Install dependencies
