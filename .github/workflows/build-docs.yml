@@ -27,9 +27,17 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd webCamProcessor.wiki
           ls
-          # cd wiki
-          # yarn
+          yarn
+          yarn docs
+
+      - name: Commit and push changes to Wiki
+        run: |
+          ls
+          git add .
+          git commit -m "Add build artifact"
+          git push
       # - uses: actions/checkout@v2
       # - uses: actions/setup-node@v2
       #   with:
