@@ -1,5 +1,5 @@
 /**
-  * This module is a simple implementation of the EventEmitter pattern.
+  * This module is a simple implementation of the EventEmitter pattern 123.
   * 
   * It allows to subscribe/unsubscribe to events and emit them.
   * 
