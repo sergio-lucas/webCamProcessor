@@ -36,8 +36,12 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "Wiki mirror"
           ls
+          cd wiki
+          ls
           git add .
-          git commit -m "Add build artifact"
+          git status
+          # only commit if there are changes
+          git diff-index --quiet HEAD -- || git commit -m "sync from doc/"
           git push
       # - uses: actions/checkout@v2
       # - uses: actions/setup-node@v2
