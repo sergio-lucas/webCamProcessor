@@ -39,3 +39,4 @@ website/i18n/**/*
 public/
 # Ignore generate Typescript docs
 docs/docs/api
+wiki
